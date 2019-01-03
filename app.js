@@ -1,11 +1,12 @@
 console.log('it is here')
 
 // in this branch we are goin to deal with set interval and set timeout both are similar funcitons
+// initialize the wait variable
 let waitCount = 0
 
 waitForIt = function() {
 	// set timeout will call the callback once after waiting the specified time in ms
-	setTimeOut(function() {
+	setTimeout(function() {
 		// code goes here
 		console.log(`set-timeout callback has been executed ${waitCount} times`)
 		// the wait time interval
@@ -37,7 +38,15 @@ $('#add-task-button').click(function() {
 })
 
 const moveItem = function(event) {
-	console.log(event.target.parentElement)
 	$('#done-list').append(event.target.parentElement)
 	$(event.target).off()
+	$(event.target).click(deleteTask)
+	//call the createTimeLoop this will not stop so refresh the page to pause
+	createTimeLoop()
+}
+
+let deleteTask = function(event) {
+	$(event.target.parentElement).remove()
+	// call the waitForIt function
+	waitForIt()
 }
